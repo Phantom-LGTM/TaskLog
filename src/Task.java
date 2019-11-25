@@ -1,6 +1,7 @@
 import java.util.Calendar;
+import java.util.TimerTask;
 
-public class Task {
+public class Task extends TimerTask {
     private Calendar calendar;
     private String task;
     private String call;
@@ -12,6 +13,17 @@ public class Task {
 
 
     public Task(){}
+
+    @Override
+    public void run() {
+        setSch(false);
+        System.out.println(getNumber());
+        System.out.println("Название: "+getName());
+        System.out.println("Описание: "+getTask());
+        System.out.println("Номер телефона: "+getCall());
+        System.out.println("ФИО: "+getFio());
+        System.out.println("Почта: "+getMail());
+    }
 
     public Task(String name,String task,Calendar calendar,String call,String fio,String mail,int number,boolean sch){
         this.task=task;
@@ -65,7 +77,7 @@ public class Task {
         this.number = number;
     }
 
-    public boolean isSch() {
+    public boolean getSch() {
         return sch;
     }
 
@@ -88,4 +100,6 @@ public class Task {
     public void setMail(String mail) {
         this.mail = mail;
     }
+
+
 }
