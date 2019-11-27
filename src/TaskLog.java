@@ -6,159 +6,120 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 
-public class TaskLog {
-    private ArrayList<Task> tasks;
-    private int number=1;
+public class TaskLog {//класс списка задач
+    private ArrayList<Task> tasks;//список задач
+    private int number=1;//номер задачи(просто хранит информацию о номере следующей задачи)
 
-    public TaskLog(){
+    public TaskLog(){//конструктор создает пустой список
         ArrayList<Task> objectives = new ArrayList<Task>();
         tasks=objectives;
     }
 
     public TaskLog(ArrayList<Task> objective){
         tasks=objective;
-    }
+    }//создает список из уже готового листа задач
 
     public int getNumber() {
         return number;
-    }
+    }//получение номера следующей задачи
 
     public void setNumber(int number) {
         this.number = number;
-    }
+    }//изменение номера
 
     public ArrayList<Task> getTasks() {
         return tasks;
-    }
+    }//получение списка
 
     public void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
+    }//изменение списка
+
+    public void addTask(Task objective){// добавление новой задачи по уже созданной задаче
+        tasks.add(objective);//добавление в список задачи
+        this.number++;//увеличение номера следующей задачи
     }
 
-    public void addTask(Task objective){// добавление новой задачи
-        tasks.add(objective);
-        this.number++;
-    }
-
-    public Task getTaskByNumber(int number){
-        Task task= new Task();
-        for(int i = 0; i<tasks.size();i++) {
-            if (number ==tasks.get(i).getNumber()){
-                task=tasks.get(i);
+    public Task getTaskByNumber(int number){//получение задачи но ее номеру
+        Task task= new Task();//новая пустая задача
+        for(int i = 0; i<tasks.size();i++) {//перебор всех элементов списка
+            if (number ==tasks.get(i).getNumber()){//если принимаемый номер равен номеру задачи
+                task=tasks.get(i);//присвоение необходимой задачи пустой
             }
         }
         return task;
     }
 
     public void addTask(String name,String task,Calendar calendar,String call,String fio,String mail,boolean sch){// добавление новой задачи
-        int number=this.number;
-        Task objective=new Task(name,task,calendar,call,fio,mail,number,sch);
-        tasks.add(objective);
-        this.number++;
+        Task objective=new Task(name,task,calendar,call,fio,mail,this.number,sch);//создание задачи
+        tasks.add(objective);//добавление ее в список
+        this.number++;//увеличение на 1 номер следующей задачи
     }
 
     public void deleteTask(int numberTask){//удаление по номеру задачи
-        for(int i=0;i<tasks.size();i++){
-            if(tasks.get(i).getNumber()==numberTask){
-                tasks.remove(i);
+        for(int i=0;i<tasks.size();i++){//перебор списка
+            if(tasks.get(i).getNumber()==numberTask){//если принятый номер равен номеру задачи
+                tasks.remove(i);//удаление выбраного элемента
             }
         }
     }
 
-    /*public void deleteTask(Task objective){// удаление по ссылке на задачу
-        tasks.remove(objective);
-    }*/
-
-    public void setTask(int numberTask, String task, Calendar calendar){//изменение задачи и даты у задачи
+    /*public void setTask(int numberTask, String task, Calendar calendar){//изменение задачи и даты у задачи
         for(int i=0;i<tasks.size();i++){
             if(tasks.get(i).getNumber()==numberTask){
                 tasks.get(i).setTask(task);
                 tasks.get(i).setCalendar(calendar);
             }
         }
-    }
+    }*/
 
     public void setTask(int numberTask,Task task1){//изменение задачи и даты у задачи
-        for(int i=0;i<tasks.size();i++){
-            if(tasks.get(i).getNumber()==numberTask){
-                if(task1.getTask().equals("")==false) {
-                    tasks.get(i).setTask(task1.getTask());
+        for(int i=0;i<tasks.size();i++){//перебор списка
+            if(tasks.get(i).getNumber()==numberTask){//если номер задачи рвен принятому номеру
+                if(task1.getTask().equals("")==false) {//если описание принятой задачи не равено пустой строке
+                    tasks.get(i).setTask(task1.getTask());//изменение описания на принятое описание
                 }
-                tasks.get(i).setCalendar(task1.getCalendar());
-                if(task1.getCall().equals("")==false) {
-                    tasks.get(i).setCall(task1.getCall());
+                tasks.get(i).setCalendar(task1.getCalendar());//изменение даты на принятую
+                if(task1.getCall().equals("")==false) {//если контактный номер принятой задачи не равено пустой строке
+                    tasks.get(i).setCall(task1.getCall());//изменение контактного номера на принятый
                 }
-                if(task1.getFio().equals("")==false) {
-                    tasks.get(i).setFio(task1.getCall());
+                if(task1.getFio().equals("")==false) {//если ФИО принятой задачи не равено пустой строке
+                    tasks.get(i).setFio(task1.getFio());//изменение ФИО на принятое
                 }
-                if(task1.getMail().equals("")==false) {
-                    tasks.get(i).setMail(task1.getMail());
+                if(task1.getMail().equals("")==false) {//если почта принятой задачи не равено пустой строке
+                    tasks.get(i).setMail(task1.getMail());//изменение почты на принятую
                 }
-                if(task1.getTask().equals("")==false) {
-                    tasks.get(i).setName(task1.getName());
+                if(task1.getName().equals("")==false) {//если название принятой задачи не равено пустой строке
+                    tasks.get(i).setName(task1.getName());//изменение названия на принятое
                 }
             }
         }
     }
 
-    public ArrayList<Task> getSortOfTime(){
-        ArrayList<Task> sortTask=new ArrayList<Task>();
-        for(int i =0;i<tasks.size();i++){
-            sortTask.add(tasks.get(i));
+    public ArrayList<Task> getSortOfTime(){//сортировка списка по времени
+        ArrayList<Task> sortTask=new ArrayList<Task>();//пустой список который будет сортированным
+        for(int i =0;i<tasks.size();i++){//перебор списка
+            sortTask.add(tasks.get(i));//заполнение сортированного списка
         }
-        for (int i = 1; i < tasks.size(); i++) {
-            if ( sortTask.get(i).getCalendar().getTime().before(sortTask.get(i-1).getCalendar().getTime())==true) {//<
-                Task temp = sortTask.get(i);
-                sortTask.set(i,sortTask.get(i-1)) ;
-                sortTask.set(i-1,temp);
-                for (int z = i - 1; (z - 1) >= 0; z--) {//>=
-                    if (sortTask.get(z).getCalendar().getTime().before(sortTask.get(z-1).getCalendar().getTime())==true) {//<
-                        Task temp2 = sortTask.get(z);
-                        sortTask.set(z,sortTask.get(z-1)) ;
-                        sortTask.set(z-1,temp2);
-                    } else {
-                        break;
+        for (int i = 1; i < tasks.size(); i++) {//перебор сортированного списка
+            if ( sortTask.get(i).getCalendar().getTime().before(sortTask.get(i-1).getCalendar().getTime())==true) {//"<" если задача i-тая
+                // раньше задачи i-1
+                Task temp = sortTask.get(i);//запись i-той задачи
+                sortTask.set(i,sortTask.get(i-1)) ;//запись в i-тую i-1-той задачи
+                sortTask.set(i-1,temp);//запись i-той задачи в i-1
+                for (int z = i - 1; (z - 1) >= 0; z--) {//перебор списка от i-1 элемента до 0
+                    if (sortTask.get(z).getCalendar().getTime().before(sortTask.get(z-1).getCalendar().getTime())==true) {//< если задача
+                        // z-тая раньше задачи z-1
+                        Task temp2 = sortTask.get(z);//запись z-той задачи
+                        sortTask.set(z,sortTask.get(z-1)) ;//запись в z-тую z-1-той задачи
+                        sortTask.set(z-1,temp2);//запись z-той задачи в z-1
+                    } else {//иначе
+                        break;//заершить цикл
                     }
                 }
             }
         }
-        return sortTask;
+        return sortTask;//возвращает отсортированный список
     }
-
-
-
-    /*public static void main(String[] args) {
-        TaskLog tasks = new TaskLog();
-        Calendar calendar = new GregorianCalendar(2020, 1, 15);
-        calendar.set(Calendar.HOUR_OF_DAY, 15);
-        calendar.set(Calendar.MINUTE, 30);
-        Calendar calendar2 = new GregorianCalendar(2020, 1, 15);
-        calendar2.set(Calendar.HOUR_OF_DAY, 1);
-        calendar2.set(Calendar.MINUTE, 30);
-        String task = "задача";
-        String call = "9764578";
-        String mail = "";
-        String fio = "fgj";
-        String name = "test";
-        boolean sch = true;
-        for (int i = 0; i < 10; i++) {
-            int number = tasks.getNumber();
-            Task objective = new Task(name, task, calendar, call, fio, mail, number, sch);
-            tasks.addTask(objective);
-        }
-        for (int i = 0; i < tasks.getTasks().size(); i++) {
-            System.out.println(tasks.getTasks().get(i).getCalendar().getTime());
-        }
-        /*int number = tasks.getNumber();
-        Task objective2 = new Task(name, task, calendar2, call, fio, mail, number, sch);
-        tasks.addTask(objective2);
-        tasks.deleteTask(4);
-        //System.out.println(tasks.getTasks().size());
-
-        for (int i = 0; i < tasks.getTasks().size(); i++) {
-            System.out.println(tasks.getSortOfTime().get(i).getCalendar().getTime());
-        }
-    }*/
-
 
 }

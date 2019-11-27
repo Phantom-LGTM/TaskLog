@@ -6,144 +6,100 @@ import java.util.GregorianCalendar;
 
 
 
-public class RecordTasks {
-    public static void writeTasks(TaskLog tasks,  File file2) throws IOException {
-        FileWriter fileWriter = new FileWriter(file2);
-        BufferedWriter out = new BufferedWriter(fileWriter);
-        out.write(String.valueOf(tasks.getSortOfTime().size()));
-        out.write(' ');
+public class RecordTasks {//класс отвечающий за хранение информации
+    public static void writeTasks(TaskLog tasks,  File file2) throws IOException {//сетод записи задач в файл
+        FileWriter fileWriter = new FileWriter(file2);//
+        BufferedWriter out = new BufferedWriter(fileWriter);//
+        out.write(String.valueOf(tasks.getSortOfTime().size()));//запись количества всех задач
+        out.write("&tl; ");//запись делителя
         out.write('\n');
-        out.write(' ');
-        for (int i = 0; i < tasks.getSortOfTime().size(); i++) {
-            out.write(String.valueOf(tasks.getSortOfTime().get(i).getNumber()));
-            out.write(' ');
-            out.write(tasks.getSortOfTime().get(i).getName());
-            out.write(' ');
-            out.write(tasks.getSortOfTime().get(i).getTask());
-            out.write(' ');
-            out.write(String.valueOf(tasks.getSortOfTime().get(i).getCalendar().get(Calendar.YEAR)));
-            out.write(' ');
-            out.write(String.valueOf(tasks.getSortOfTime().get(i).getCalendar().get(Calendar.MONTH)));
-            out.write(' ');
-            out.write(String.valueOf(tasks.getSortOfTime().get(i).getCalendar().get(Calendar.DAY_OF_MONTH)));
-            out.write(' ');
-            out.write(String.valueOf(tasks.getSortOfTime().get(i).getCalendar().get(Calendar.HOUR_OF_DAY)));
-            out.write(' ');
-            out.write(String.valueOf(tasks.getSortOfTime().get(i).getCalendar().get(Calendar.MINUTE)));
-            out.write(' ');
-            out.write(String.valueOf(tasks.getSortOfTime().get(i).getCalendar().get(Calendar.SECOND)));
-            out.write(' ');
-            out.write(tasks.getSortOfTime().get(i).getFio());
-            out.write(' ');
-            out.write(tasks.getSortOfTime().get(i).getCall());
-            out.write(' ');
-            out.write(tasks.getSortOfTime().get(i).getMail());
-            out.write(' ');
-            if(tasks.getSortOfTime().get(i).getSch()==true){
-                out.write('t');
-                out.write(' ');
-            }else{
-                out.write('f');
-                out.write(' ');
+        out.write("&tl; ");
+        for (int i = 0; i < tasks.getSortOfTime().size(); i++) {//перебор всех задач
+            out.write(String.valueOf(tasks.getSortOfTime().get(i).getNumber()));//запись номера задачи
+            out.write("&tl; ");
+            out.write(tasks.getSortOfTime().get(i).getName());//запись названия
+            out.write("&tl; ");
+            out.write(tasks.getSortOfTime().get(i).getTask());//запись описания
+            out.write("&tl; ");
+            out.write(String.valueOf(tasks.getSortOfTime().get(i).getCalendar().get(Calendar.YEAR)));//запись года
+            out.write("&tl; ");
+            out.write(String.valueOf(tasks.getSortOfTime().get(i).getCalendar().get(Calendar.MONTH)));//запись месяца
+            out.write("&tl; ");
+            out.write(String.valueOf(tasks.getSortOfTime().get(i).getCalendar().get(Calendar.DAY_OF_MONTH)));//запись дня
+            out.write("&tl; ");
+            out.write(String.valueOf(tasks.getSortOfTime().get(i).getCalendar().get(Calendar.HOUR_OF_DAY)));//запись часа дня
+            out.write("&tl; ");
+            out.write(String.valueOf(tasks.getSortOfTime().get(i).getCalendar().get(Calendar.MINUTE)));//запись минут
+            out.write("&tl; ");
+            out.write(String.valueOf(tasks.getSortOfTime().get(i).getCalendar().get(Calendar.SECOND)));//запись секунд
+            out.write("&tl; ");
+            out.write(tasks.getSortOfTime().get(i).getFio());//запись ФИО
+            out.write("&tl; ");
+            out.write(tasks.getSortOfTime().get(i).getCall());//запись контактного номера
+            out.write("&tl; ");
+            out.write(tasks.getSortOfTime().get(i).getMail());//запись почты
+            out.write("&tl; ");
+            if(tasks.getSortOfTime().get(i).getSch()==true){//если метка равна true
+                out.write('t');//запись t
+                out.write("&tl; ");
+            }else{//иначе
+                out.write('f');//запись f
+                out.write("&tl; ");
             }
             out.write('\n');
-            out.write(' ');
+            out.write("&tl; ");
         }
-        out.close();
+        out.close();//закрытие потока
     }
 
-    public static TaskLog inputTasks(File file) throws IOException {
-        FileReader fileReader = new FileReader(file);
-        BufferedReader d = new BufferedReader(fileReader);
-        TaskLog tasks=new TaskLog();
+    public static TaskLog inputTasks(File file) throws IOException {//считывание информации из файла
+        FileReader fileReader = new FileReader(file);//
+        BufferedReader d = new BufferedReader(fileReader);//
+        TaskLog tasks=new TaskLog();//создание нового списка
         int i;
         int counter=-1;
-        String str="";
-        while((i=d.read())!= -1){
-            char ch=(char)i;
-            str=str+ch;
-            if(ch=='\n'){
+        String str="";//пустая строка
+        while((i=d.read())!= -1){//чтение всей информации из файла
+            char ch=(char)i;//запись символа из файла
+            str=str+ch;//запись символа в строку
+            if(ch=='\n'){//счетчик количества задач
                 counter++;
             }
         }
 
-        String delimeter=" ";
-        String[] subStr;
-        subStr=str.split(delimeter);
-        /*for (int j = 0; j < subStr.length; j++){
-            System.out.println(subStr[j]);
-        }*/
-        for (int j = 0; j < counter; j++){
+        String delimeter="&tl; ";//делитель строки
+        String[] subStr;//массив строк
+        subStr=str.split(delimeter);//разделение строки на массив строк
+        for (int j = 0; j < counter; j++){//перебор всех задач
             //System.out.print(subStr[4+j*14]);
-            int number=(int) Float.parseFloat(subStr[2+j*14]);
-            String name=subStr[3+j*14];
-            String task=subStr[4+j*14];
+            int number=(int) Float.parseFloat(subStr[2+j*14]);//запись номера задачи
+            String name=subStr[3+j*14];//запись названия задачи
+            String task=subStr[4+j*14];//запись описания задачи
             Calendar calendar = new GregorianCalendar(Integer.parseInt(subStr[5 + j * 14]),
-                    (int) Float.parseFloat(subStr[6 + j * 14]), (int) Float.parseFloat(subStr[7 + j * 14]));
-            calendar.set(Calendar.HOUR_OF_DAY, (int) Float.parseFloat(subStr[8 + j * 14]));
-            calendar.set(Calendar.MINUTE, (int) Float.parseFloat(subStr[9 + j * 14]));
-            calendar.set(Calendar.SECOND, (int) Float.parseFloat(subStr[10 + j * 14]));
-            String fio = subStr[11 + j * 14];
-            String call = subStr[12 + j * 14];
-            String mail = subStr[13 + j * 14];
+                    (int) Float.parseFloat(subStr[6 + j * 14]), (int) Float.parseFloat(subStr[7 + j * 14]));//запись даты
+            calendar.set(Calendar.HOUR_OF_DAY, (int) Float.parseFloat(subStr[8 + j * 14]));//часы
+            calendar.set(Calendar.MINUTE, (int) Float.parseFloat(subStr[9 + j * 14]));//минуты
+            calendar.set(Calendar.SECOND, (int) Float.parseFloat(subStr[10 + j * 14]));//секунды
+            String fio = subStr[11 + j * 14];//ФИО
+            String call = subStr[12 + j * 14];//контактный номер
+            String mail = subStr[13 + j * 14];//почта
             boolean sch;
-            //System.out.println(subStr[14+j*14]);
-            if (subStr[14 + j * 14].equals("t")==true) {
-                sch = true;
+            if (subStr[14 + j * 14].equals("t")==true) {//если t
+                sch = true;//то метка равна true
             }
-            //if(subStr[14 + j * 14] == "f")
-            else
-            {
-                sch = false;
+            else {//иначе
+                sch = false;//метка равна false
             }
-            Task objective = new Task(name, task, calendar, call, fio, mail, number, sch);
-            tasks.addTask(objective);
+            Task objective = new Task(name, task, calendar, call, fio, mail, number, sch);//создание задачи
+            tasks.addTask(objective);//добавление ее в список
         }
-        d.close();
-        /*for(int j=0;j<tasks.getTasks().size();j++){
-            tasks.getTasks().get(j).setName(getStr(tasks.getTasks().get(j).getName(),"_"));
-            tasks.getTasks().get(j).setMail(getStr(tasks.getTasks().get(j).getMail(),"_"));
-            tasks.getTasks().get(j).setFio(getStr(tasks.getTasks().get(j).getFio(),"_"));
-            tasks.getTasks().get(j).setCall(getStr(tasks.getTasks().get(j).getCall(),"_"));
-            tasks.getTasks().get(j).setTask(getStr(tasks.getTasks().get(j).getTask(),"_"));
-        }*/
-        return tasks;
+        d.close();//закрытие потока
+        return tasks;//возвращение списка задач
     }
 
-    public static String getString(String string){
-        String str=string.replace(" ","_");
+    public static String getString(String string){//на всякий случай что бы не совпало
+        String str=string.replace("&tl; ","_");//замена делителя на пижнее подчеркивание
         return str;
     }
 
-    public static String getStr(String string,String znak){
-        String str=string.replace(znak," ");
-        return str;
-    }
-
-    /*public static void main(String[] args) throws IOException {
-        File file = new File("file.txt");
-        TaskLog tasks = new TaskLog();
-        Calendar calendar = new GregorianCalendar(2019, 10, 22);
-        calendar.set(Calendar.HOUR_OF_DAY, 12);
-        calendar.set(Calendar.MINUTE, 50);
-        String task = "задание";
-        String call = "9764578";
-        String mail = "";
-        String fio = "fgj";
-        String name = "test";
-        boolean sch = true;
-        for (int i = 0; i < 10; i++) {
-            int number = tasks.getNumber();
-            //tasks.setNumber(tasks.getNumber());
-            //System.out.println(tasks.getNumber());
-            Task objective = new Task(name, task, calendar, call, fio, mail, number, sch);
-            tasks.addTask(objective);
-        }
-        writeTasks(tasks,file);
-
-        TaskLog test=inputTasks(file);
-        for(int i=0;i<test.getTasks().size();i++) {
-            System.out.println(test.getTasks().get(i).getCalendar().getTime());
-        }
-    }*/
 }
