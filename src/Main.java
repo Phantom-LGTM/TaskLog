@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.Calendar;
 import java.util.Scanner;
+import java.util.Timer;
 
 import static java.util.Calendar.*;
 
@@ -28,11 +29,21 @@ public class Main {
         return task1;//вывод задачи
     }
 
+    public static void output(int number,String name,String task,String call,String fio,String mail){
+        System.out.println(number);//вывод номера задачи
+        System.out.println("Название: "+name);//вывод названия
+        System.out.println("Описание: "+task);//вывод описания задачи
+        System.out.println("Номер телефона: "+call);//вывод контактного номера
+        System.out.println("ФИО: "+fio);//вывод ФИО
+        System.out.println("Почта: "+mail);//вывод контактной почты
+    }
+
     public static void main(String[] args) throws IOException {//запуск программы
+        Timer timer = new Timer();//создание таймера
         File file = new File("file.txt");//задание файла с котого считывается информация
         TaskLog tasks = RecordTasks.inputTasks(file);//считывание списка задач из файла
         if (tasks.getTasks().size() != 0) {//если файл не пустой
-            VerificationTask.play(tasks);//постановка имеющихся задач на таймер
+            VerificationTask.play(tasks,timer);//постановка имеющихся задач на таймер
             File file2 = new File("file.txt");//задание файла в который записывается информация информация
             RecordTasks.writeTasks(tasks, file2);//перезапись в файл обновленной информации
         }
@@ -44,7 +55,7 @@ public class Main {
                 Task task1 = getInformation(scanner);//ввод всей информации задачи
                 task1.setNumber(task1.getNumber());//запись номера задачи
                 tasks.addTask(task1);//добавление задачи в список задач
-                TimeCounter.writeMassage(task1);//постановка задачи на выполнение
+                TimeCounter.writeMassage(task1,timer);//постановка задачи на выполнение
                 RecordTasks.writeTasks(tasks, file);//перезапись в файл обновленной информации
             } else {
                 if (command.equals("delete") == true) {//команда удаление задачи
@@ -61,7 +72,7 @@ public class Main {
                         Task task = getInformation(scanner);//заполнение всей обновленной информации о задаче
                         tasks.getTaskByNumber(number).cancel();//даление таймера задачи
                         tasks.setTask(number, task);//изменеие задачи
-                        TimeCounter.writeMassage(tasks.getTaskByNumber(number));//постановка задачи на таймер
+                        TimeCounter.writeMassage(tasks.getTaskByNumber(number),timer);//постановка задачи на таймер
                         RecordTasks.writeTasks(tasks, file);//перезапись информации
                     } else {
                         if (command.equals("help") == true) {//команда вывода всех команд

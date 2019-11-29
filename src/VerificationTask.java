@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Timer;
 
 public class VerificationTask {//запуск задач
 
-        public static void play(TaskLog tasks){// запуск задач
+        public static void play(TaskLog tasks, Timer timer){// запуск задач
         for(int i=0;i<tasks.getTasks().size();i++) {//перебор всех задач
             Calendar calendar = new GregorianCalendar();//создание календаря с настоящим временем
             if (tasks.getTasks().get(i).getSch() == true) {//если задача еще не была вызвана
@@ -16,7 +17,7 @@ public class VerificationTask {//запуск задач
                 }
                 if (tasks.getTasks().get(i).getCalendar().getTime().after(calendar.getTime()))//если время задачи больше текущего времени
                 {
-                    TimeCounter.writeMassage(tasks.getTasks().get(i));//постановка задачи на таймер
+                    TimeCounter.writeMassage(tasks.getTasks().get(i),timer);//постановка задачи на таймер
                 }
             }
         }

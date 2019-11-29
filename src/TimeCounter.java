@@ -3,12 +3,13 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Timer;
 
-public class TimeCounter extends Timer {//класс таймера
+public class TimeCounter {//класс таймера
 
-    public static void writeMassage(Task task) {//постановка задачи на выполнение
-        Timer timer = new Timer();//создание таймера
+
+    public static void writeMassage(Task task,Timer timer) {//постановка задачи на выполнение
         timer.schedule(task, task.getCalendar().getTime());//постановка задачи на заданное время
     }
+
 
 
     public static Calendar getCalendar(String data) {//получение даты из строки

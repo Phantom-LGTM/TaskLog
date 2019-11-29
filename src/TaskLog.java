@@ -31,12 +31,13 @@ public class TaskLog {//класс списка задач
         return tasks;
     }//получение списка
 
-    public void setTasks(ArrayList<Task> tasks) {
+    /*public void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
-    }//изменение списка
+    }//изменение списка*/
 
     public void addTask(Task objective){// добавление новой задачи по уже созданной задаче
         tasks.add(objective);//добавление в список задачи
+        objective.setNumber(getNumber());
         this.number++;//увеличение номера следующей задачи
     }
 
@@ -50,11 +51,11 @@ public class TaskLog {//класс списка задач
         return task;
     }
 
-    public void addTask(String name,String task,Calendar calendar,String call,String fio,String mail,boolean sch){// добавление новой задачи
+    /*public void addTask(String name,String task,Calendar calendar,String call,String fio,String mail,boolean sch){// добавление новой задачи
         Task objective=new Task(name,task,calendar,call,fio,mail,this.number,sch);//создание задачи
         tasks.add(objective);//добавление ее в список
         this.number++;//увеличение на 1 номер следующей задачи
-    }
+    }*/
 
     public void deleteTask(int numberTask){//удаление по номеру задачи
         for(int i=0;i<tasks.size();i++){//перебор списка
@@ -63,15 +64,6 @@ public class TaskLog {//класс списка задач
             }
         }
     }
-
-    /*public void setTask(int numberTask, String task, Calendar calendar){//изменение задачи и даты у задачи
-        for(int i=0;i<tasks.size();i++){
-            if(tasks.get(i).getNumber()==numberTask){
-                tasks.get(i).setTask(task);
-                tasks.get(i).setCalendar(calendar);
-            }
-        }
-    }*/
 
     public void setTask(int numberTask,Task task1){//изменение задачи и даты у задачи
         for(int i=0;i<tasks.size();i++){//перебор списка

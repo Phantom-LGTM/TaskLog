@@ -17,12 +17,7 @@ public class Task extends TimerTask {//класс задачи расширяю�
     @Override
     public void run() {//метод запуска задачи
         setSch(false);//замена метки на сработано
-        System.out.println(getNumber());//вывод номера задачи
-        System.out.println("Название: "+getName());//вывод названия
-        System.out.println("Описание: "+getTask());//вывод описания задачи
-        System.out.println("Номер телефона: "+getCall());//вывод контактного номера
-        System.out.println("ФИО: "+getFio());//вывод ФИО
-        System.out.println("Почта: "+getMail());//вывод контактной почты
+        Main.output(getNumber(),getName(),getTask(),getCall(),getFio(),getMail());
     }
 
     public Task(String name,String task,Calendar calendar,String call,String fio,String mail,int number,boolean sch){// конструктор задачи
