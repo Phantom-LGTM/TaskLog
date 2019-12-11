@@ -17,17 +17,16 @@ public class Task extends TimerTask {//класс задачи расширяю�
     @Override
     public void run() {//метод запуска задачи
         setSch(false);//замена метки на сработано
-        Main.output(getNumber(),getName(),getTask(),getCall(),getFio(),getMail());
+        Main.output(getName(),getTask(),getCall(),getFio(),getMail());
     }
 
-    public Task(String name,String task,Calendar calendar,String call,String fio,String mail,int number,boolean sch){// конструктор задачи
+    public Task(String name,String task,Calendar calendar,String call,String fio,String mail,boolean sch){// конструктор задачи
         this.task=task;
         this.calendar=calendar;
         this.name=name;
         this.call=call;
         this.fio=fio;
         this.mail=mail;
-        this.number=number;
         this.sch=sch;
     }
 

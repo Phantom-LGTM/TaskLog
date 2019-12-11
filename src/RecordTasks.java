@@ -90,7 +90,7 @@ public class RecordTasks {//класс отвечающий за хранени�
             else {//иначе
                 sch = false;//метка равна false
             }
-            Task objective = new Task(name, task, calendar, call, fio, mail, number, sch);//создание задачи
+            Task objective = new Task(name, task, calendar, call, fio, mail, sch);//создание задачи
             tasks.addTask(objective);//добавление ее в список
         }
         d.close();//закрытие потока
@@ -100,6 +100,11 @@ public class RecordTasks {//класс отвечающий за хранени�
     public static String getString(String string){//на всякий случай что бы не совпало
         String str=string.replace("&tl; ","_");//замена делителя на пижнее подчеркивание
         return str;
+    }
+
+    public static String data(Calendar calendar){
+        String data= calendar.getTime().toString();
+        return data;
     }
 
 }

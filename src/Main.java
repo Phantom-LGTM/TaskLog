@@ -1,106 +1,375 @@
-import java.io.*;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
-import java.util.Scanner;
 import java.util.Timer;
 
 import static java.util.Calendar.*;
 
-public class Main {
+public class Main extends JDialog {
+    private JPanel contentPane;
+    private JFormattedTextField taskName;
+    private JTextArea taskDescription;
+    private JButton deleteButton;
+    private JButton addButton;
+    private DefaultListModel<String> listModel;
+    private JList<String> taskList;
+    private JFormattedTextField yearField;
+    private JFormattedTextField monthField;
+    private JFormattedTextField dayField;
+    private JFormattedTextField hourField;
+    private JFormattedTextField secondsField;
+    private JFormattedTextField minutesField;
+    private JFormattedTextField numberField;
+    private JFormattedTextField mailField;
+    private JFormattedTextField fioField;
+    private JFormattedTextField selectedTaskNameFormattedTextField;
+    private JButton editButton;
+    private JScrollPane scrollPane;
+    private JButton toTrayButton;
+    private JScrollBar scrollBar1;
+    private JTextField editName;
+    private TrayIcon trayIcon;
+    private SystemTray tray;
+    private TaskLog tasks;
+    private Timer timer;
+    private File file;
 
 
-    public static Task getInformation(Scanner scanner){//метод ввода всех компанент задачи
-        System.out.println("введите наименование задачи:");
-        String name = RecordTasks.getString(scanner.nextLine());//ввод названия
-        System.out.println("введите описание задачи:");
-        String task = RecordTasks.getString(scanner.nextLine());//ввод описания
-        System.out.println("введите время в которое должна сработать задача(YYYY:MM:DD:hh:mm:ss):");
-        String data = scanner.nextLine();//ввод строки даты
-        Calendar calendar = TimeCounter.getCalendar(data);//получение даты из строки
-        calendar.add(MONTH,-1);//уменьшение месяца на 1, т.к. остчет месяцев начинается с 0
-        System.out.println("введите контактное ФИО:");
-        String fio = RecordTasks.getString(scanner.nextLine());//ввод ФИО
-        System.out.println("введите контактную почту:");
-        String mail = RecordTasks.getString(scanner.nextLine());//ввод почты
-        System.out.println("введите контактный номер:");
-        String call = RecordTasks.getString(scanner.nextLine());//ввод контактного номера
-        boolean sch=true;//метка задется как true
-        int number=0;//номер задается 0
-        Task task1=new Task(name,task,calendar,call,fio,mail,number,sch);//создание задачи
-        return task1;//вывод задачи
+
+    public static void output(String name,String task,String call,String fio,String mail){
+        System.out.println("Execution.task");
+        createDialog(name, task, fio, mail, call);
+    }
+    public static void createDialog(String title, String description, String fio, String mail, String number)
+    {
+
+        JDialog dialog = new JDialog();
+
+        JTextArea textArea = new JTextArea();
+
+        textArea.append(title + '\n');
+        textArea.append(description + '\n');
+        textArea.append(fio + '\n');
+        textArea.append(mail + '\n');
+        textArea.append(number);
+
+        dialog.setModal(true);
+        dialog.setLocation(200, 200);
+
+        dialog.getContentPane().add(textArea);
+
+        dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        dialog.setSize(400, 300);
+
+        dialog.setVisible(true);
     }
 
-    public static void output(int number,String name,String task,String call,String fio,String mail){
-        System.out.println(number);//вывод номера задачи
-        System.out.println("Название: "+name);//вывод названия
-        System.out.println("Описание: "+task);//вывод описания задачи
-        System.out.println("Номер телефона: "+call);//вывод контактного номера
-        System.out.println("ФИО: "+fio);//вывод ФИО
-        System.out.println("Почта: "+mail);//вывод контактной почты
-    }
 
-    public static void main(String[] args) throws IOException {//запуск программы
-        Timer timer = new Timer();//создание таймера
-        File file = new File("file.txt");//задание файла с котого считывается информация
-        TaskLog tasks = RecordTasks.inputTasks(file);//считывание списка задач из файла
-        if (tasks.getTasks().size() != 0) {//если файл не пустой
-            VerificationTask.play(tasks,timer);//постановка имеющихся задач на таймер
-            File file2 = new File("file.txt");//задание файла в который записывается информация информация
-            RecordTasks.writeTasks(tasks, file2);//перезапись в файл обновленной информации
-        }
-        while (true) {//зацикливание программы
-            Scanner scanner = new Scanner(System.in);//создание сканера
-            System.out.println("введите команду для дальнейшей работы:");
-            String command = scanner.nextLine();//ввод команды
-            if (command.equals("add") == true) {//команда добавления задачи
-                Task task1 = getInformation(scanner);//ввод всей информации задачи
-                task1.setNumber(task1.getNumber());//запись номера задачи
-                tasks.addTask(task1);//добавление задачи в список задач
-                TimeCounter.writeMassage(task1,timer);//постановка задачи на выполнение
-                RecordTasks.writeTasks(tasks, file);//перезапись в файл обновленной информации
-            } else {
-                if (command.equals("delete") == true) {//команда удаление задачи
-                    System.out.println("введите номер задачи");
-                    int number = scanner.nextInt();//ввод номера по которому удалится задача
-                    tasks.getTaskByNumber(number).cancel();//удаление таймера
-                    tasks.deleteTask(number);//удаление задачи из списка
-                    RecordTasks.writeTasks(tasks, file);//перезапись в файл обновленной информации
-                } else {
-                    if (command.equals("remove") == true) {//команда изменения задачи
-                        System.out.println("введите номер задачи которую хотите изменить:");
-                        int number = scanner.nextInt();//ввод номера задачи
-                        System.out.println("если не хотите менять данный элемент оставьте поле пустым");
-                        Task task = getInformation(scanner);//заполнение всей обновленной информации о задаче
-                        tasks.getTaskByNumber(number).cancel();//даление таймера задачи
-                        tasks.setTask(number, task);//изменеие задачи
-                        TimeCounter.writeMassage(tasks.getTaskByNumber(number),timer);//постановка задачи на таймер
-                        RecordTasks.writeTasks(tasks, file);//перезапись информации
-                    } else {
-                        if (command.equals("help") == true) {//команда вывода всех команд
-                            System.out.println("help-помощь");
-                            System.out.println("delete-удаление");
-                            System.out.println("add-добавление");
-                            System.out.println("remov-изменение задачи");
-                            System.out.println("task-задачи которые еще не были вызваны");
-                        } else {
-                            if (command.equals("task") == true) {//команда вывода всех задач которые еще не были вызваны
-                                for (int i = 0; i < tasks.getTasks().size(); i++) {//перебор всех задач
-                                    if (tasks.getTasks().get(i).getSch() == true) {//если метка равна true
-                                        tasks.getTasks().get(i).run();//выполнеие задачи
-                                        tasks.getTasks().get(i).setSch(true);//обнуление метки, постановка ее в положение true
-                                    }
-                                }
-                            }else {
-                                if (command.equals("close") == true) {//команда выхода из цикла
-                                    RecordTasks.writeTasks(tasks, file);//перезапись в файл
-                                    break;//остановка цикла
-                                } else {//если ни одна из команд не совпала
-                                    System.out.println("не существует такой команды");
-                                }
-                            }
-                        }
-                    }
+    public Main() {
+        super.setName("Task list");
+        setContentPane(contentPane);
+        contentPane.setName("Task manager");
+        contentPane.updateUI();
+        setResizable(false);
+        setModal(true);
+
+        listModel = new DefaultListModel<String>();
+        taskList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        taskList.setModel(listModel);
+        scrollPane.setViewportView(taskList);
+
+        tray=SystemTray.getSystemTray();
+        Image image=Toolkit.getDefaultToolkit().getImage("/Media/ddd.png");
+
+        ActionListener exitListener=new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Exiting....");
+                System.exit(0);
+            }
+        };
+
+        PopupMenu popup=new PopupMenu();
+        MenuItem defaultItem=new MenuItem("Exit");
+        defaultItem.addActionListener(exitListener);
+        popup.add(defaultItem);
+        defaultItem=new MenuItem("Open");
+        defaultItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    toTray(false);
+                } catch (AWTException ex) {
+                    ex.printStackTrace();
                 }
             }
+        });
+        popup.add(defaultItem);
+        trayIcon=new TrayIcon(image, "SystemTray Demo", popup);
+        trayIcon.setImageAutoSize(true);
+        setIconImage(Toolkit.getDefaultToolkit().getImage("Media/ddd.png"));
+
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addClick();
+
+                /* Передавать объект Task */
+            }
+        });
+
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteClick();
+            }
+        });
+
+        editButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                /* taskList.getSelectedIndex() + 1 */
+                editClick();
+            }
+        });
+
+        toTrayButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    toTray(true);
+                } catch (AWTException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        taskList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                editPull();
+            }
+        });
+        // call onCancel() when cross is clicked
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                onCancel();
+            }
+        });
+
+        // call onCancel() on ESCAPE
+        contentPane.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+
+        timer = new Timer();//создание таймер
+        file = new File("file.xml");//задание файла с котого считывается информация
+        try {
+            tasks = RecordTasks.inputTasks(file);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        if (tasks.getTasks().size() != 0) {//если файл не пустой
+            VerificationTask.play(tasks,timer);//постановка имеющихся задач на таймер
+            File file2 = new File("file.xml");//задание файла в который записывается информация информация
+            try {
+                RecordTasks.writeTasks(tasks, file2);//перезапись в файл обновленной информации
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        for(int i =0; i<tasks.getTasks().size();i++){
+            listModel.addElement(tasks.getTasks().get(i).getName()+" "+RecordTasks.data(tasks.getTasks().get(i).getCalendar()));
+        }
+        System.out.println(listModel.size());
+        for(int i = 0;i<listModel.size();i++){
+            System.out.println(listModel.get(i));
+            System.out.println("---");
+        }
+
+    }
+
+    private void addClick() {
+        String data="";
+        int mounth= Integer.parseInt(monthField.getText())-1;
+        data+=yearField.getText()+":"+mounth+":"+dayField.getText()+":"+hourField.getText()+":"+minutesField.getText()+":"
+        +secondsField.getText();
+        System.out.println(data);
+        Calendar calendar=TimeCounter.getCalendar(data);
+        Task task=new Task(taskName.getText(),taskDescription.getText(),calendar,numberField.getText(),fioField.getText(),mailField.getText()
+                ,true);
+        tasks.addTask(task);
+        TimeCounter.writeMassage(task,timer);
+        try {
+            RecordTasks.writeTasks(tasks,file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        listModel.addElement(task.getName()+" "+RecordTasks.data(task.getCalendar()));
+        taskList.setModel(listModel);
+
+        yearField.setText("");
+        monthField.setText("");
+        dayField.setText("");
+
+        hourField.setText("");
+        minutesField.setText("");
+        secondsField.setText("");
+
+        taskName.setText("");
+        taskDescription.setText("");
+
+        mailField.setText("");
+        numberField.setText("");
+        fioField.setText("");
+    }
+
+    private void deleteClick() {
+        System.out.println("Delete task");
+        System.out.println(taskList.getSelectedIndex() ); // Индекс начинается с -1
+        if(taskList.getSelectedIndex()==-1 || taskList.getSelectedIndex()==listModel.getSize()) {
+            listModel.removeElement(listModel.getSize());  // Удаление выбранного элемента
+            taskList.setModel(listModel);
+        }else{
+            listModel.removeElement(taskList.getSelectedIndex());  // Удаление выбранного элемента
+            taskList.setModel(listModel);
+        }
+        System.out.println("Delete task");
+
+        tasks.getTasks().get(taskList.getSelectedIndex()).cancel();
+        tasks.getTasks().get(taskList.getSelectedIndex());
+        tasks.deleteTask(taskList.getSelectedIndex());
+        try {
+            RecordTasks.writeTasks(tasks,file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        yearField.setText("");
+        monthField.setText("");
+        dayField.setText("");
+
+        hourField.setText("");
+        minutesField.setText("");
+        secondsField.setText("");
+
+        taskName.setText("");
+        taskDescription.setText("");
+
+        mailField.setText("");
+        numberField.setText("");
+        fioField.setText("");
+
+    }
+
+    private void editClick() {
+        System.out.println("Edit task");
+        String data="";
+        int mounth= Integer.parseInt(monthField.getText())-1;
+        data+=yearField.getText()+":"+mounth+":"+dayField.getText()+":"+hourField.getText()+":"+minutesField.getText()+":"
+                +secondsField.getText();
+        System.out.println(data);
+        Calendar calendar=TimeCounter.getCalendar(data);
+        Task task=new Task(taskName.getText(),taskDescription.getText(),calendar,numberField.getText(),fioField.getText(),mailField.getText()
+                ,true);
+        tasks.setTask(taskList.getSelectedIndex(),
+                task);
+
+        TimeCounter.writeMassage(task,timer);
+        try {
+            RecordTasks.writeTasks(tasks,file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        listModel.set(taskList.getSelectedIndex(), task.getName()+" "+RecordTasks.data(task.getCalendar()));
+
+        yearField.setText("");
+        monthField.setText("");
+        dayField.setText("");
+
+        hourField.setText("");
+        minutesField.setText("");
+        secondsField.setText("");
+
+        taskName.setText("");
+        taskDescription.setText("");
+
+        mailField.setText("");
+        numberField.setText("");
+        fioField.setText("");
+
+        //taskList.clearSelection();
+
+        /* Добавить */
+    }
+
+
+
+    private void onCancel() {
+        System.out.println("And finally exit...");
+        // add your code here if necessary
+        try {
+            RecordTasks.writeTasks(tasks,file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        dispose();
+    }
+
+    private void toTray(boolean flag) throws AWTException {
+        if(flag) {
+            tray.add(trayIcon);
+            setLocation(-400, -400);
+            setSize(0,0);
+            /*Хитровыебанный метод для сворачивания в трей JDialog. ORACLE НЕ ДОДУМАЛИСЬ!*/
+        } else {
+            tray.remove(trayIcon);
+            setLocation(0, 0);
+            setSize(1400, 400);
+        }
+    }
+
+    private void editPull(){
+        int a = 0;
+
+        System.out.println("Index of selected item");
+        System.out.println(taskList.getSelectedIndex());
+
+        yearField.setText(String.valueOf(tasks.getTasks().get(taskList.getSelectedIndex()+a).getCalendar().get(YEAR)));
+        monthField.setText(String.valueOf(tasks.getTasks().get(taskList.getSelectedIndex()+a).getCalendar().get(MONTH)+1));
+        dayField.setText(String.valueOf(tasks.getTasks().get(taskList.getSelectedIndex()+a).getCalendar().get(DAY_OF_MONTH)));
+
+        hourField.setText(String.valueOf(tasks.getTasks().get(taskList.getSelectedIndex()+a).getCalendar().get(HOUR_OF_DAY)));
+        minutesField.setText(String.valueOf(tasks.getTasks().get(taskList.getSelectedIndex()+a).getCalendar().get(MINUTE)));
+        secondsField.setText(String.valueOf(tasks.getTasks().get(taskList.getSelectedIndex()+a).getCalendar().get(SECOND)));
+
+        taskName.setText(tasks.getTasks().get(taskList.getSelectedIndex()+a).getName());
+        taskDescription.setText(tasks.getTasks().get(taskList.getSelectedIndex()+a).getTask());
+
+        mailField.setText(tasks.getTasks().get(taskList.getSelectedIndex()+a).getMail());
+        numberField.setText(tasks.getTasks().get(taskList.getSelectedIndex()+a).getCall());
+        fioField.setText(tasks.getTasks().get(taskList.getSelectedIndex()+a).getFio());
+    }
+
+    public static void main(String[] args) {
+        Main dialog = new Main();
+        dialog.pack();
+        dialog.setVisible(true);
+
+        System.exit(0);
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }

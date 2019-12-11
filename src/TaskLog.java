@@ -58,11 +58,7 @@ public class TaskLog {//класс списка задач
     }*/
 
     public void deleteTask(int numberTask){//удаление по номеру задачи
-        for(int i=0;i<tasks.size();i++){//перебор списка
-            if(tasks.get(i).getNumber()==numberTask){//если принятый номер равен номеру задачи
-                tasks.remove(i);//удаление выбраного элемента
-            }
-        }
+        tasks.remove(numberTask);//удаление выбраного элемента
     }
 
     public void setTask(int numberTask,Task task1){//изменение задачи и даты у задачи
