@@ -4,11 +4,15 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Timer;
 
 
 public class TaskLog {//класс списка задач
     private ArrayList<Task> tasks;//список задач
     private int number=1;//номер задачи(просто хранит информацию о номере следующей задачи)
+
+
+
 
     public TaskLog(){//конструктор создает пустой список
         ArrayList<Task> objectives = new ArrayList<Task>();

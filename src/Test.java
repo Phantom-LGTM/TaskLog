@@ -1,26 +1,18 @@
-
-
+/*
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-
-
-public class RecordTasks {//класс отвечающий за хранение информации
-    private static File file= new File("file.xml");//задание файла с котого считывается информация;
-
+public class Test {
     public static void writeTasks(TaskLog tasks,  File file) throws IOException, ParserConfigurationException, SAXException, TransformerException {//сетод записи задач в файл
         DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -75,13 +67,31 @@ public class RecordTasks {//класс отвечающий за хранени�
         return tasks;
     }
 
-    public static File getFile() {
-        return file;
+   public static void main(String[] args) throws ParserConfigurationException, TransformerException, SAXException, IOException {
+        TaskLog tasks = new TaskLog();
+        File file = new File("file.xml");
+        String name="name";
+        String task ="task";
+        String call = "123456789";
+        String fio = "EVA";
+        String mail = "mail";
+        boolean sch = false;
+        Calendar calendar = new GregorianCalendar(2019,11,12,15,30,40);
+        for( int i = 0; i<10;i++){
+            Task objective = new Task(name, task, calendar, call, fio, mail, sch);
+            tasks.addTask(objective);
+        }
+        writeTasks(tasks,file);
+        System.out.println(tasks.getTasks().size());
+
+        TaskLog tasks2=inputTasks(file);
+        for(int i = 0;i<tasks2.getTasks().size();i++) {
+            System.out.println(tasks2.getTasks().get(i).getSch());
+        }
     }
 
-    public static String data(Calendar calendar){
-        String data= calendar.getTime().toString();
-        return data;
-    }
+
+
 
 }
+*/

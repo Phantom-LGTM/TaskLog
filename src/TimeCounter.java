@@ -5,6 +5,7 @@ import java.util.Timer;
 
 public class TimeCounter {//класс таймера
 
+    private static Timer timer = new Timer() ;
 
     public static void writeMassage(Task task,Timer timer) {//постановка задачи на выполнение
         timer.schedule(task, task.getCalendar().getTime());//постановка задачи на заданное время
@@ -27,5 +28,9 @@ public class TimeCounter {//класс таймера
             Calendar calendar = new GregorianCalendar();//задается данное время
             return calendar;//вывод
         }
+    }
+
+    public static Timer getTimer() {
+        return timer;
     }
 }

@@ -1,10 +1,16 @@
-8&tl; 
-&tl; 1&tl; fghjk&tl; fghjkl&tl; 2019&tl; 11&tl; 11&tl; 20&tl; 0&tl; 0&tl; fgh&tl; 1234567&tl; fghjk&tl; t&tl; 
-&tl; 2&tl; fghjk&tl; fghjkl&tl; 2019&tl; 11&tl; 11&tl; 20&tl; 0&tl; 0&tl; fgh&tl; 1234567&tl; fghjk&tl; t&tl; 
-&tl; 3&tl; fghjk&tl; fghjkl&tl; 2019&tl; 11&tl; 11&tl; 20&tl; 0&tl; 0&tl; fgh&tl; 1234567&tl; fghjk&tl; t&tl; 
-&tl; 4&tl; fghjk&tl; fghjkl&tl; 2019&tl; 11&tl; 11&tl; 20&tl; 0&tl; 0&tl; fgh&tl; 1234567&tl; fghjk&tl; t&tl; 
-&tl; 5&tl; fghjk&tl; fghjkl&tl; 2019&tl; 11&tl; 11&tl; 20&tl; 0&tl; 0&tl; fgh&tl; 1234567&tl; fghjk&tl; t&tl; 
-&tl; 6&tl; fghjk&tl; fghjkl&tl; 2019&tl; 11&tl; 11&tl; 20&tl; 0&tl; 0&tl; fgh&tl; 1234567&tl; fghjk&tl; t&tl; 
-&tl; 7&tl; fghjk&tl; fghjkl&tl; 2019&tl; 11&tl; 11&tl; 20&tl; 0&tl; 0&tl; fgh&tl; 1234567&tl; fghjk&tl; t&tl; 
-&tl; 8&tl; fghjk&tl; fghjkl&tl; 2020&tl; 11&tl; 11&tl; 20&tl; 0&tl; 0&tl; fgh&tl; 1234567&tl; fghjk&tl; t&tl; 
-&tl; 
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tasks>
+    <task FIO="EVA" day="12" hour="15" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
+    <task FIO="EVA" day="12" hour="15" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
+    <task FIO="EVA" day="12" hour="15" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
+    <task FIO="EVA" day="12" hour="15" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
+    <task FIO="EVA" day="12" hour="15" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
+    <task FIO="EVA" day="12" hour="15" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
+    <task FIO="EVA" day="12" hour="15" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2020"/>
+    <task FIO="EVA" day="12" hour="15" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
+    <task FIO="EVA" day="12" hour="13" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
+    <task FIO="EVA" day="12" hour="13" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
+    <task FIO="EVA" day="12" hour="15" mail="mail" mark="true" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
+    <task FIO="EVA" day="12" hour="15" mail="mail" mark="true" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2020"/>
+    <task FIO="EVA" day="12" hour="15" mail="mail" mark="true" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2020"/>
+</tasks>

@@ -1,7 +1,11 @@
 
+import org.xml.sax.SAXException;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -37,8 +41,7 @@ public class Main extends JDialog {
     private TrayIcon trayIcon;
     private SystemTray tray;
     private TaskLog tasks;
-    private Timer timer;
-    private File file;
+
 
 
 
@@ -71,7 +74,7 @@ public class Main extends JDialog {
     }
 
 
-    public Main() {
+    public Main() throws ParserConfigurationException, SAXException, TransformerException {
         super.setName("Task list");
         setContentPane(contentPane);
         contentPane.setName("Task manager");
@@ -116,7 +119,17 @@ public class Main extends JDialog {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addClick();
+                try {
+                    addClick();
+                } catch (ParserConfigurationException ex) {
+                    ex.printStackTrace();
+                } catch (TransformerException ex) {
+                    ex.printStackTrace();
+                } catch (SAXException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
 
                 /* Передавать объект Task */
             }
@@ -125,7 +138,15 @@ public class Main extends JDialog {
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                deleteClick();
+                try {
+                    deleteClick();
+                } catch (TransformerException ex) {
+                    ex.printStackTrace();
+                } catch (SAXException ex) {
+                    ex.printStackTrace();
+                } catch (ParserConfigurationException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
@@ -133,7 +154,15 @@ public class Main extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 /* taskList.getSelectedIndex() + 1 */
-                editClick();
+                try {
+                    editClick();
+                } catch (TransformerException ex) {
+                    ex.printStackTrace();
+                } catch (SAXException ex) {
+                    ex.printStackTrace();
+                } catch (ParserConfigurationException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
@@ -157,30 +186,44 @@ public class Main extends JDialog {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                onCancel();
+                try {
+                    onCancel();
+                } catch (TransformerException ex) {
+                    ex.printStackTrace();
+                } catch (SAXException ex) {
+                    ex.printStackTrace();
+                } catch (ParserConfigurationException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
         // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+                try {
+                    onCancel();
+                } catch (TransformerException ex) {
+                    ex.printStackTrace();
+                } catch (SAXException ex) {
+                    ex.printStackTrace();
+                } catch (ParserConfigurationException ex) {
+                    ex.printStackTrace();
+                }
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
 
-        timer = new Timer();//создание таймер
-        file = new File("file.xml");//задание файла с котого считывается информация
         try {
-            tasks = RecordTasks.inputTasks(file);
+            tasks = RecordTasks.inputTasks(RecordTasks.getFile());
         } catch (IOException e) {
             e.printStackTrace();
         }
         if (tasks.getTasks().size() != 0) {//если файл не пустой
-            VerificationTask.play(tasks,timer);//постановка имеющихся задач на таймер
-            File file2 = new File("file.xml");//задание файла в который записывается информация информация
+            VerificationTask.play(tasks,TimeCounter.getTimer());//постановка имеющихся задач на таймер
+
             try {
-                RecordTasks.writeTasks(tasks, file2);//перезапись в файл обновленной информации
+                RecordTasks.writeTasks(tasks, RecordTasks.getFile());//перезапись в файл обновленной информации
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -196,7 +239,7 @@ public class Main extends JDialog {
 
     }
 
-    private void addClick() {
+    private void addClick() throws ParserConfigurationException, TransformerException, SAXException, IOException {
         String data="";
         int mounth= Integer.parseInt(monthField.getText())-1;
         data+=yearField.getText()+":"+mounth+":"+dayField.getText()+":"+hourField.getText()+":"+minutesField.getText()+":"
@@ -206,12 +249,10 @@ public class Main extends JDialog {
         Task task=new Task(taskName.getText(),taskDescription.getText(),calendar,numberField.getText(),fioField.getText(),mailField.getText()
                 ,true);
         tasks.addTask(task);
-        TimeCounter.writeMassage(task,timer);
-        try {
-            RecordTasks.writeTasks(tasks,file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        TimeCounter.writeMassage(task,TimeCounter.getTimer());
+
+        RecordTasks.writeTasks(tasks,RecordTasks.getFile());
+
 
         listModel.addElement(task.getName()+" "+RecordTasks.data(task.getCalendar()));
         taskList.setModel(listModel);
@@ -232,7 +273,7 @@ public class Main extends JDialog {
         fioField.setText("");
     }
 
-    private void deleteClick() {
+    private void deleteClick() throws TransformerException, SAXException, ParserConfigurationException {
         System.out.println("Delete task");
         System.out.println(taskList.getSelectedIndex() ); // Индекс начинается с -1
         if(taskList.getSelectedIndex()==-1 || taskList.getSelectedIndex()==listModel.getSize()) {
@@ -248,7 +289,7 @@ public class Main extends JDialog {
         tasks.getTasks().get(taskList.getSelectedIndex());
         tasks.deleteTask(taskList.getSelectedIndex());
         try {
-            RecordTasks.writeTasks(tasks,file);
+            RecordTasks.writeTasks(tasks,RecordTasks.getFile());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -271,7 +312,7 @@ public class Main extends JDialog {
 
     }
 
-    private void editClick() {
+    private void editClick() throws TransformerException, SAXException, ParserConfigurationException {
         System.out.println("Edit task");
         String data="";
         int mounth= Integer.parseInt(monthField.getText())-1;
@@ -284,9 +325,9 @@ public class Main extends JDialog {
         tasks.setTask(taskList.getSelectedIndex(),
                 task);
 
-        TimeCounter.writeMassage(task,timer);
+        TimeCounter.writeMassage(task,TimeCounter.getTimer());
         try {
-            RecordTasks.writeTasks(tasks,file);
+            RecordTasks.writeTasks(tasks,RecordTasks.getFile());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -315,11 +356,11 @@ public class Main extends JDialog {
 
 
 
-    private void onCancel() {
+    private void onCancel() throws TransformerException, SAXException, ParserConfigurationException {
         System.out.println("And finally exit...");
         // add your code here if necessary
         try {
-            RecordTasks.writeTasks(tasks,file);
+            RecordTasks.writeTasks(tasks,RecordTasks.getFile());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -331,7 +372,6 @@ public class Main extends JDialog {
             tray.add(trayIcon);
             setLocation(-400, -400);
             setSize(0,0);
-            /*Хитровыебанный метод для сворачивания в трей JDialog. ORACLE НЕ ДОДУМАЛИСЬ!*/
         } else {
             tray.remove(trayIcon);
             setLocation(0, 0);
@@ -361,7 +401,7 @@ public class Main extends JDialog {
         fioField.setText(tasks.getTasks().get(taskList.getSelectedIndex()+a).getFio());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws TransformerException, SAXException, ParserConfigurationException {
         Main dialog = new Main();
         dialog.pack();
         dialog.setVisible(true);
