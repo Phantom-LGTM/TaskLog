@@ -13,6 +13,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
+import java.net.InetAddress;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -42,6 +43,7 @@ public class RecordTasks {//класс отвечающий за хранени�
             task.setAttribute("number",tasks.getTasks().get(i).getCall());
             task.setAttribute("FIO",tasks.getTasks().get(i).getFio());
             task.setAttribute("mark", String.valueOf(tasks.getTasks().get(i).getSch()));
+            task.setAttribute("login", String.valueOf(tasks.getTasks().get(i).getLogin()));
         }
         Transformer t = TransformerFactory.newInstance().newTransformer();
         t.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -66,11 +68,12 @@ public class RecordTasks {//класс отвечающий за хранени�
             int minute = Integer.parseInt(attributes.getNamedItem("minute").getNodeValue());
             int second = Integer.parseInt(attributes.getNamedItem("second").getNodeValue());
             boolean mark = Boolean.parseBoolean(attributes.getNamedItem("mark").getNodeValue());
+            String login = attributes.getNamedItem("login").getNodeValue();
 
             Calendar calendar = new GregorianCalendar(year,month,day,hour,minute,second);
 
             tasks.addTask(new Task(attributes.getNamedItem("name").getNodeName(),attributes.getNamedItem("task").getNodeValue(),calendar,
-                    attributes.getNamedItem("number").getNodeValue(),attributes.getNamedItem("FIO").getNodeValue(),attributes.getNamedItem("mail").getNodeValue(),mark));
+                    attributes.getNamedItem("number").getNodeValue(),attributes.getNamedItem("FIO").getNodeValue(),attributes.getNamedItem("mail").getNodeValue(),mark,login));
         }
         return tasks;
     }

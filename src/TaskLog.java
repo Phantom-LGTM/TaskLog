@@ -42,6 +42,9 @@ public class TaskLog {//класс списка задач
     public void addTask(Task objective){// добавление новой задачи по уже созданной задаче
         tasks.add(objective);//добавление в список задачи
         objective.setNumber(getNumber());
+        if(objective.getSch()== true) {
+            TimeCounter.writeMassage(objective, TimeCounter.getTimer());
+        }
         this.number++;//увеличение номера следующей задачи
     }
 
@@ -66,26 +69,8 @@ public class TaskLog {//класс списка задач
     }
 
     public void setTask(int numberTask,Task task1){//изменение задачи и даты у задачи
-        for(int i=0;i<tasks.size();i++){//перебор списка
-            if(tasks.get(i).getNumber()==numberTask){//если номер задачи рвен принятому номеру
-                if(task1.getTask().equals("")==false) {//если описание принятой задачи не равено пустой строке
-                    tasks.get(i).setTask(task1.getTask());//изменение описания на принятое описание
-                }
-                tasks.get(i).setCalendar(task1.getCalendar());//изменение даты на принятую
-                if(task1.getCall().equals("")==false) {//если контактный номер принятой задачи не равено пустой строке
-                    tasks.get(i).setCall(task1.getCall());//изменение контактного номера на принятый
-                }
-                if(task1.getFio().equals("")==false) {//если ФИО принятой задачи не равено пустой строке
-                    tasks.get(i).setFio(task1.getFio());//изменение ФИО на принятое
-                }
-                if(task1.getMail().equals("")==false) {//если почта принятой задачи не равено пустой строке
-                    tasks.get(i).setMail(task1.getMail());//изменение почты на принятую
-                }
-                if(task1.getName().equals("")==false) {//если название принятой задачи не равено пустой строке
-                    tasks.get(i).setName(task1.getName());//изменение названия на принятое
-                }
-            }
-        }
+        deleteTask(numberTask);
+        addTask(task1);
     }
 
     public ArrayList<Task> getSortOfTime(){//сортировка списка по времени

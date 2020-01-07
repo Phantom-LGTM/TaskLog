@@ -1,97 +1,106 @@
-/*
-import org.w3c.dom.*;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.io.*;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.net.Socket;
 
 public class Test {
-    public static void writeTasks(TaskLog tasks,  File file) throws IOException, ParserConfigurationException, SAXException, TransformerException {//сетод записи задач в файл
-        DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.newDocument();
-        Element root = document.createElement("tasks");
-        document.appendChild(root);
-        for(int i=0;i<tasks.getTasks().size();i++) {
-            Element task = document.createElement("task");
-            root.appendChild(task);
-            task.setAttribute("name",tasks.getTasks().get(i).getName());
-            task.setAttribute("task",tasks.getTasks().get(i).getTask());
-            task.setAttribute("year", String.valueOf(tasks.getTasks().get(i).getCalendar().get(Calendar.YEAR)));
-            task.setAttribute("month", String.valueOf(tasks.getTasks().get(i).getCalendar().get(Calendar.MONTH)));
-            task.setAttribute("day", String.valueOf(tasks.getTasks().get(i).getCalendar().get(Calendar.DAY_OF_MONTH)));
-            task.setAttribute("hour", String.valueOf(tasks.getTasks().get(i).getCalendar().get(Calendar.HOUR_OF_DAY)));
-            task.setAttribute("minute", String.valueOf(tasks.getTasks().get(i).getCalendar().get(Calendar.MINUTE)));
-            task.setAttribute("second", String.valueOf(tasks.getTasks().get(i).getCalendar().get(Calendar.SECOND)));
-            task.setAttribute("mail",tasks.getTasks().get(i).getMail());
-            task.setAttribute("number",tasks.getTasks().get(i).getCall());
-            task.setAttribute("FIO",tasks.getTasks().get(i).getFio());
-            task.setAttribute("mark", String.valueOf(tasks.getTasks().get(i).getSch()));
+
+        private static Socket clientSocket; //сокет для общения
+        private static BufferedReader reader; // нам нужен ридер читающий с консоли, иначе как
+        // мы узнаем что хочет сказать клиент?
+        private static BufferedReader in; // поток чтения из сокета
+        private static BufferedWriter out; // поток записи в сокет
+        private static String login="LOGIN";
+
+        public static void main(String[] args) {
+                try {
+                        try {
+                                        // адрес - локальный хост, порт - 4004, такой же как у сервера
+                                        clientSocket = new Socket("localhost", 8080); // этой строкой мы запрашиваем
+                                        //  у сервера доступ на соединение
+                                        reader = new BufferedReader(new InputStreamReader(System.in));
+                                        // читать соообщения с сервера
+                                        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                                        // писать туда же
+                                        out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+
+                                        out.write(login + "\n"); // отправляем сообщение на сервер
+                                        out.flush();
+                                        while (true) {
+                                                System.out.println("Вы что-то хотели сказать? Введите это здесь:");
+                                                String word = reader.readLine();
+                                                if(word.equals("stop")){
+                                                        out.write(word + "\n"); // отправляем сообщение на сервер
+                                                        out.flush();
+                                                        break;
+                                                }
+                                                if(word.equals("add")){
+                                                        out.write(word + "\n"); // отправляем сообщение на сервер
+                                                        out.flush();
+                                                        System.out.println("введите имя");
+                                                        String name=reader.readLine();
+                                                        System.out.println("введите описание");
+                                                        String task=reader.readLine();
+                                                        System.out.println("введите год");
+                                                        String year=reader.readLine();
+                                                        System.out.println("введите месяц");
+                                                        String mounth=reader.readLine();
+                                                        System.out.println("введите день");
+                                                        String day=reader.readLine();
+                                                        System.out.println("введите час");
+                                                        String hour=reader.readLine();
+                                                        System.out.println("введите минуты");
+                                                        String minute=reader.readLine();
+                                                        System.out.println("введите секунды");
+                                                        String second=reader.readLine();
+                                                        System.out.println("введите почту");
+                                                        String mail=reader.readLine();
+                                                        System.out.println("введите номер");
+                                                        String call=reader.readLine();
+                                                        System.out.println("введите фио");
+                                                        String fio=reader.readLine();
+                                                        out.write(name + "\n"); // отправляем сообщение на сервер
+                                                        out.flush();
+                                                        out.write(task + "\n"); // отправляем сообщение на сервер
+                                                        out.flush();
+                                                        out.write(year + "\n"); // отправляем сообщение на сервер
+                                                        out.flush();
+                                                        out.write(mounth + "\n"); // отправляем сообщение на сервер
+                                                        out.flush();
+                                                        out.write(day + "\n"); // отправляем сообщение на сервер
+                                                        out.flush();
+                                                        out.write(hour + "\n"); // отправляем сообщение на сервер
+                                                        out.flush();
+                                                        out.write(minute + "\n"); // отправляем сообщение на сервер
+                                                        out.flush();
+                                                        out.write(second + "\n"); // отправляем сообщение на сервер
+                                                        out.flush();
+                                                        out.write(mail + "\n"); // отправляем сообщение на сервер
+                                                        out.flush();
+                                                        out.write(call + "\n"); // отправляем сообщение на сервер
+                                                        out.flush();
+                                                        out.write(fio + "\n"); // отправляем сообщение на сервер
+                                                        out.flush();
+
+                                                }
+                                                if(word.equals("delete")){
+                                                        out.write(word+"\n");
+                                                        out.flush();
+                                                        System.out.println("введите наименование задачи");
+                                                        String name = reader.readLine();
+                                                        out.write(name+"\n");
+                                                        out.flush();
+                                                }
+                                                String serverWord = in.readLine(); // ждём, что скажет сервер
+                                                System.out.println(serverWord); // получив - выводим на экран
+                                        }
+                        } finally { // в любом случае необходимо закрыть сокет и потоки
+                                System.out.println("Клиент был закрыт...");
+                                clientSocket.close();
+                                in.close();
+                                out.close();
+                        }
+                } catch (IOException e) {
+                        System.err.println(e);
+                }
+
         }
-        Transformer t = TransformerFactory.newInstance().newTransformer();
-        t.setOutputProperty(OutputKeys.INDENT, "yes");
-        t.transform(new DOMSource(document),new StreamResult(file));
-    }
-
-
-    public static TaskLog inputTasks(File file) throws IOException, SAXException, ParserConfigurationException {//считывание информации из файла
-        TaskLog tasks = new TaskLog();
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.parse(file);
-        NodeList employeeElements = document.getDocumentElement().getElementsByTagName("task");
-
-        for (int i = 0; i < employeeElements.getLength(); i++) {
-            Node task = employeeElements.item(i);
-            NamedNodeMap attributes = task.getAttributes();
-            int year = Integer.parseInt(attributes.getNamedItem("year").getNodeValue());
-            int month = Integer.parseInt(attributes.getNamedItem("month").getNodeValue());
-            int day = Integer.parseInt(attributes.getNamedItem("day").getNodeValue());
-            int hour = Integer.parseInt(attributes.getNamedItem("hour").getNodeValue());
-            int minute = Integer.parseInt(attributes.getNamedItem("minute").getNodeValue());
-            int second = Integer.parseInt(attributes.getNamedItem("second").getNodeValue());
-            boolean mark = Boolean.parseBoolean(attributes.getNamedItem("mark").getNodeValue());
-
-            Calendar calendar = new GregorianCalendar(year,month,day,hour,minute,second);
-
-            tasks.addTask(new Task(attributes.getNamedItem("name").getNodeName(),attributes.getNamedItem("task").getNodeValue(),calendar,
-                    attributes.getNamedItem("number").getNodeValue(),attributes.getNamedItem("FIO").getNodeValue(),attributes.getNamedItem("mail").getNodeValue(),mark));
-        }
-        return tasks;
-    }
-
-   public static void main(String[] args) throws ParserConfigurationException, TransformerException, SAXException, IOException {
-        TaskLog tasks = new TaskLog();
-        File file = new File("file.xml");
-        String name="name";
-        String task ="task";
-        String call = "123456789";
-        String fio = "EVA";
-        String mail = "mail";
-        boolean sch = false;
-        Calendar calendar = new GregorianCalendar(2019,11,12,15,30,40);
-        for( int i = 0; i<10;i++){
-            Task objective = new Task(name, task, calendar, call, fio, mail, sch);
-            tasks.addTask(objective);
-        }
-        writeTasks(tasks,file);
-        System.out.println(tasks.getTasks().size());
-
-        TaskLog tasks2=inputTasks(file);
-        for(int i = 0;i<tasks2.getTasks().size();i++) {
-            System.out.println(tasks2.getTasks().get(i).getSch());
-        }
-    }
-
-
-
-
 }
-*/

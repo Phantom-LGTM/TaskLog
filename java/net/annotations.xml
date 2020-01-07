@@ -1,0 +1,5 @@
+<root>
+    <item name='java.net.ServerSocket'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>

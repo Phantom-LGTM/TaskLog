@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tasks>
-    <task FIO="EVA" day="12" hour="15" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
-    <task FIO="EVA" day="12" hour="15" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
-    <task FIO="EVA" day="12" hour="15" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
-    <task FIO="EVA" day="12" hour="15" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
-    <task FIO="EVA" day="12" hour="15" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
-    <task FIO="EVA" day="12" hour="15" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
-    <task FIO="EVA" day="12" hour="15" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2020"/>
-    <task FIO="EVA" day="12" hour="15" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
-    <task FIO="EVA" day="12" hour="13" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
-    <task FIO="EVA" day="12" hour="13" mail="mail" mark="false" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
-    <task FIO="EVA" day="12" hour="15" mail="mail" mark="true" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2019"/>
-    <task FIO="EVA" day="12" hour="15" mail="mail" mark="true" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2020"/>
-    <task FIO="EVA" day="12" hour="15" mail="mail" mark="true" minute="30" month="11" name="name" number="123456789" second="40" task="task" year="2020"/>
+    <task FIO="fio" day="1" hour="3" login="12345" mail="mail" mark="true" minute="3" month="2" name="name" number="45678" second="2" task="" year="2027"/>
+    <task FIO="fdgfd" day="1" hour="0" login="sdgdsgsd" mail="fdgd" mark="false" minute="0" month="0" name="fdgfd" number="fdgfd" second="0" task="fdbdfbdfb" year="2020"/>
 </tasks>

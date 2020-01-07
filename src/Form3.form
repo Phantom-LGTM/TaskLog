@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Form3">
+  <grid id="27dc6" binding="panel" layout-manager="GridLayoutManager" row-count="9" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="582" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="7e15b" class="javax.swing.JTextPane" binding="textPane1" default-binding="true">
+        <constraints>
+          <grid row="1" column="1" row-span="7" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="61e82" class="javax.swing.JTextField" binding="nameField">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="bb934" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Task"/>
+        </properties>
+      </component>
+      <component id="a0140" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Name"/>
+        </properties>
+      </component>
+      <component id="4831e" class="javax.swing.JTextField" binding="mailField">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="59e96" class="javax.swing.JTextField" binding="numberField">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="b9776" class="javax.swing.JTextField" binding="fioField">
+        <constraints>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="dc45e" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Mail"/>
+        </properties>
+      </component>
+      <component id="3d309" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Number"/>
+        </properties>
+      </component>
+      <component id="22ec" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="FIO"/>
+        </properties>
+      </component>
+      <component id="b95ba" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Year"/>
+        </properties>
+      </component>
+      <component id="20d0c" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Hour"/>
+        </properties>
+      </component>
+      <component id="535c6" class="javax.swing.JComboBox" binding="yearBox">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <model>
+            <item value="2020"/>
+            <item value="2021"/>
+            <item value="2022"/>
+            <item value="2023"/>
+            <item value="2024"/>
+            <item value="2025"/>
+            <item value="2026"/>
+            <item value="2027"/>
+            <item value="2028"/>
+            <item value="2029"/>
+            <item value="2030"/>
+            <item value="2031"/>
+            <item value="2032"/>
+            <item value="2033"/>
+            <item value="2034"/>
+            <item value="2035"/>
+            <item value="2036"/>
+            <item value="2037"/>
+            <item value="2038"/>
+            <item value="2039"/>
+            <item value="2040"/>
+            <item value="2041"/>
+            <item value="2042"/>
+            <item value="2043"/>
+            <item value="2044"/>
+            <item value="2045"/>
+            <item value="2046"/>
+            <item value="2047"/>
+            <item value="2048"/>
+            <item value="2049"/>
+            <item value="2050"/>
+            <item value="2051"/>
+            <item value="2052"/>
+            <item value="2053"/>
+            <item value="2054"/>
+            <item value="2055"/>
+            <item value="2056"/>
+            <item value="2057"/>
+            <item value="2058"/>
+            <item value="2059"/>
+            <item value="2060"/>
+            <item value="2061"/>
+            <item value="2062"/>
+            <item value="2063"/>
+            <item value="2064"/>
+            <item value="2065"/>
+            <item value="2066"/>
+            <item value="2067"/>
+            <item value="2068"/>
+            <item value="2069"/>
+            <item value="2070"/>
+            <item value="2071"/>
+            <item value="2072"/>
+            <item value="2073"/>
+            <item value="2074"/>
+            <item value="2075"/>
+            <item value="2076"/>
+            <item value="2077"/>
+            <item value="2078"/>
+            <item value="2079"/>
+            <item value="2080"/>
+            <item value="2081"/>
+            <item value="2082"/>
+            <item value="2083"/>
+            <item value="2084"/>
+            <item value="2085"/>
+            <item value="2086"/>
+            <item value="2087"/>
+            <item value="2088"/>
+            <item value="2089"/>
+            <item value="2090"/>
+            <item value="2091"/>
+            <item value="2092"/>
+            <item value="2093"/>
+            <item value="2094"/>
+            <item value="2095"/>
+            <item value="2096"/>
+            <item value="2097"/>
+            <item value="2098"/>
+            <item value="2099"/>
+            <item value="2100"/>
+            <item value="2101"/>
+            <item value="2102"/>
+            <item value="2103"/>
+            <item value="2104"/>
+            <item value="2105"/>
+            <item value="2106"/>
+            <item value="2107"/>
+            <item value="2108"/>
+            <item value="2109"/>
+            <item value="2110"/>
+            <item value="2111"/>
+            <item value="2112"/>
+            <item value="2113"/>
+            <item value="2114"/>
+            <item value="2115"/>
+            <item value="2116"/>
+            <item value="2117"/>
+            <item value="2118"/>
+            <item value="2119"/>
+            <item value="2120"/>
+          </model>
+        </properties>
+      </component>
+      <component id="3d83" class="javax.swing.JComboBox" binding="hourBox">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <model>
+            <item value="0"/>
+            <item value="1"/>
+            <item value="2"/>
+            <item value="3"/>
+            <item value="4"/>
+            <item value="5"/>
+            <item value="6"/>
+            <item value="7"/>
+            <item value="8"/>
+            <item value="9"/>
+            <item value="10"/>
+            <item value="11"/>
+            <item value="12"/>
+            <item value="13"/>
+            <item value="14"/>
+            <item value="15"/>
+            <item value="16"/>
+            <item value="17"/>
+            <item value="18"/>
+            <item value="19"/>
+            <item value="20"/>
+            <item value="21"/>
+            <item value="22"/>
+            <item value="23"/>
+          </model>
+        </properties>
+      </component>
+      <component id="8436e" class="javax.swing.JComboBox" binding="dayBox">
+        <constraints>
+          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <model>
+            <item value="1"/>
+            <item value="2"/>
+            <item value="3"/>
+            <item value="4"/>
+            <item value="5"/>
+            <item value="6"/>
+            <item value="7"/>
+            <item value="8"/>
+            <item value="9"/>
+            <item value="10"/>
+            <item value="11"/>
+            <item value="12"/>
+            <item value="13"/>
+            <item value="14"/>
+            <item value="15"/>
+            <item value="16"/>
+            <item value="17"/>
+            <item value="18"/>
+            <item value="19"/>
+            <item value="20"/>
+            <item value="21"/>
+            <item value="22"/>
+            <item value="23"/>
+            <item value="24"/>
+            <item value="25"/>
+            <item value="26"/>
+            <item value="27"/>
+            <item value="28"/>
+            <item value="29"/>
+            <item value="30"/>
+            <item value="31"/>
+          </model>
+        </properties>
+      </component>
+      <component id="a928" class="javax.swing.JComboBox" binding="secondBox">
+        <constraints>
+          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <model>
+            <item value="0"/>
+            <item value="1"/>
+            <item value="2"/>
+            <item value="3"/>
+            <item value="4"/>
+            <item value="5"/>
+            <item value="6"/>
+            <item value="7"/>
+            <item value="8"/>
+            <item value="9"/>
+            <item value="10"/>
+            <item value="11"/>
+            <item value="12"/>
+            <item value="13"/>
+            <item value="14"/>
+            <item value="15"/>
+            <item value="16"/>
+            <item value="17"/>
+            <item value="18"/>
+            <item value="19"/>
+            <item value="20"/>
+            <item value="21"/>
+            <item value="22"/>
+            <item value="23"/>
+            <item value="24"/>
+            <item value="25"/>
+            <item value="26"/>
+            <item value="27"/>
+            <item value="28"/>
+            <item value="29"/>
+            <item value="30"/>
+            <item value="31"/>
+            <item value="32"/>
+            <item value="33"/>
+            <item value="34"/>
+            <item value="35"/>
+            <item value="36"/>
+            <item value="37"/>
+            <item value="38"/>
+            <item value="39"/>
+            <item value="40"/>
+            <item value="41"/>
+            <item value="42"/>
+            <item value="43"/>
+            <item value="44"/>
+            <item value="45"/>
+            <item value="46"/>
+            <item value="47"/>
+            <item value="48"/>
+            <item value="49"/>
+            <item value="50"/>
+            <item value="51"/>
+            <item value="52"/>
+            <item value="53"/>
+            <item value="54"/>
+            <item value="55"/>
+            <item value="56"/>
+            <item value="57"/>
+            <item value="58"/>
+            <item value="59"/>
+          </model>
+        </properties>
+      </component>
+      <component id="b5c9c" class="javax.swing.JComboBox" binding="monthBox">
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <model>
+            <item value="1"/>
+            <item value="2"/>
+            <item value="3"/>
+            <item value="4"/>
+            <item value="5"/>
+            <item value="6"/>
+            <item value="7"/>
+            <item value="8"/>
+            <item value="9"/>
+            <item value="10"/>
+            <item value="11"/>
+            <item value="12"/>
+          </model>
+        </properties>
+      </component>
+      <component id="ff85" class="javax.swing.JComboBox" binding="minuteBox">
+        <constraints>
+          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <model>
+            <item value="0"/>
+            <item value="1"/>
+            <item value="2"/>
+            <item value="3"/>
+            <item value="4"/>
+            <item value="5"/>
+            <item value="6"/>
+            <item value="7"/>
+            <item value="8"/>
+            <item value="9"/>
+            <item value="10"/>
+            <item value="11"/>
+            <item value="12"/>
+            <item value="13"/>
+            <item value="14"/>
+            <item value="15"/>
+            <item value="16"/>
+            <item value="17"/>
+            <item value="18"/>
+            <item value="19"/>
+            <item value="20"/>
+            <item value="21"/>
+            <item value="22"/>
+            <item value="23"/>
+            <item value="24"/>
+            <item value="25"/>
+            <item value="26"/>
+            <item value="27"/>
+            <item value="28"/>
+            <item value="29"/>
+            <item value="30"/>
+            <item value="31"/>
+            <item value="32"/>
+            <item value="33"/>
+            <item value="34"/>
+            <item value="35"/>
+            <item value="36"/>
+            <item value="37"/>
+            <item value="38"/>
+            <item value="39"/>
+            <item value="40"/>
+            <item value="41"/>
+            <item value="42"/>
+            <item value="43"/>
+            <item value="44"/>
+            <item value="45"/>
+            <item value="46"/>
+            <item value="47"/>
+            <item value="48"/>
+            <item value="49"/>
+            <item value="50"/>
+            <item value="51"/>
+            <item value="52"/>
+            <item value="53"/>
+            <item value="54"/>
+            <item value="55"/>
+            <item value="56"/>
+            <item value="57"/>
+            <item value="58"/>
+            <item value="59"/>
+          </model>
+        </properties>
+      </component>
+      <component id="850da" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Month"/>
+        </properties>
+      </component>
+      <component id="e2b5b" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Minute"/>
+        </properties>
+      </component>
+      <component id="153b6" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Day"/>
+        </properties>
+      </component>
+      <component id="9d9b7" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Second"/>
+        </properties>
+      </component>
+      <component id="c0410" class="javax.swing.JButton" binding="okButton" default-binding="true">
+        <constraints>
+          <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Ok"/>
+        </properties>
+      </component>
+      <hspacer id="ee803">
+        <constraints>
+          <grid row="8" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="a2d5e">
+        <constraints>
+          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <component id="4672c" class="javax.swing.JTextField" binding="loginField1">
+        <constraints>
+          <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="4c145" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Login:"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

@@ -1,3 +1,11 @@
+import org.xml.sax.SAXException;
+
+import javax.sound.sampled.Port;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import java.io.File;
+import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Calendar;
 import java.util.TimerTask;
 
@@ -10,6 +18,7 @@ public class Task extends TimerTask {//класс задачи расширяю�
     private String name;//название задачи
     private boolean sch;//метка срабатывания задачи
     private int number;//номер задачи
+    private String login;
 
 
     public Task(){}
@@ -17,10 +26,15 @@ public class Task extends TimerTask {//класс задачи расширяю�
     @Override
     public void run() {//метод запуска задачи
         setSch(false);//замена метки на сработано
-        Main.output(getName(),getTask(),getCall(),getFio(),getMail());
+       // Main.output(getName(),getTask(),getCall(),getFio(),getMail());
+        try {
+            Server.outTask(getName(),getTask(),getMail(),getCall(),getFio(),getLogin());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public Task(String name,String task,Calendar calendar,String call,String fio,String mail,boolean sch){// конструктор задачи
+    public Task(String name,String task,Calendar calendar,String call,String fio,String mail,boolean sch, String login){// конструктор задачи
         this.task=task;
         this.calendar=calendar;
         this.name=name;
@@ -28,6 +42,7 @@ public class Task extends TimerTask {//класс задачи расширяю�
         this.fio=fio;
         this.mail=mail;
         this.sch=sch;
+        this.login=login;
     }
 
     public void setCalendar(Calendar calendar) {
@@ -93,4 +108,11 @@ public class Task extends TimerTask {//класс задачи расширяю�
     public void setMail(String mail) {
         this.mail = mail;
     }//изменение почты
+
+    public void setLogin(InetAddress id) {
+        this.login = login;
+    }
+    public String getLogin() {
+        return login;
+    }
 }
