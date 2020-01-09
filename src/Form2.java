@@ -79,7 +79,7 @@ public class Form2 extends JFrame{
                 String fio = fioField.getText();
                 String login = loginField.getText();
                 System.out.println(login);
-                Task task1 = new Task(name,task,calendar,call, fio, mail,true,login);
+                Task task1 = new Task(name,task,calendar,call, fio, mail,true,login,0);
                 taskLog.setTask(index,task1);
                 try {
                     RecordTasks.writeTasks(taskLog,RecordTasks.getFile());

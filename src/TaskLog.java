@@ -65,6 +65,7 @@ public class TaskLog {//класс списка задач
     }*/
 
     public void deleteTask(int numberTask){//удаление по номеру задачи
+        tasks.get(numberTask).cancel();
         tasks.remove(numberTask);//удаление выбраного элемента
     }
 

@@ -4,6 +4,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.io.IOException;
 
+
+
 public class Main{
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
         TaskLog taskLog = RecordTasks.inputTasks(RecordTasks.getFile());

@@ -44,6 +44,8 @@ public class RecordTasks {//класс отвечающий за хранени�
             task.setAttribute("FIO",tasks.getTasks().get(i).getFio());
             task.setAttribute("mark", String.valueOf(tasks.getTasks().get(i).getSch()));
             task.setAttribute("login", String.valueOf(tasks.getTasks().get(i).getLogin()));
+            task.setAttribute("number", String.valueOf(tasks.getTasks().get(i).getNumber()));
+            task.setAttribute("numberTaskLog", String.valueOf(tasks.getNumber()));
         }
         Transformer t = TransformerFactory.newInstance().newTransformer();
         t.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -69,11 +71,12 @@ public class RecordTasks {//класс отвечающий за хранени�
             int second = Integer.parseInt(attributes.getNamedItem("second").getNodeValue());
             boolean mark = Boolean.parseBoolean(attributes.getNamedItem("mark").getNodeValue());
             String login = attributes.getNamedItem("login").getNodeValue();
+            int number = Integer.parseInt(attributes.getNamedItem("number").getNodeValue());
 
             Calendar calendar = new GregorianCalendar(year,month,day,hour,minute,second);
-
+            tasks.setNumber(Integer.parseInt(attributes.getNamedItem("numberTaskLog").getNodeValue()));
             tasks.addTask(new Task(attributes.getNamedItem("name").getNodeName(),attributes.getNamedItem("task").getNodeValue(),calendar,
-                    attributes.getNamedItem("number").getNodeValue(),attributes.getNamedItem("FIO").getNodeValue(),attributes.getNamedItem("mail").getNodeValue(),mark,login));
+                    attributes.getNamedItem("number").getNodeValue(),attributes.getNamedItem("FIO").getNodeValue(),attributes.getNamedItem("mail").getNodeValue(),mark,login,number));
         }
         return tasks;
     }

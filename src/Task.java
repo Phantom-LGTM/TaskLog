@@ -28,13 +28,13 @@ public class Task extends TimerTask {//класс задачи расширяю�
         setSch(false);//замена метки на сработано
        // Main.output(getName(),getTask(),getCall(),getFio(),getMail());
         try {
-            Server.outTask(getName(),getTask(),getMail(),getCall(),getFio(),getLogin());
+            Server.outTask(getName(),getTask(),getMail(),getCall(),getFio(),getLogin(),getNumber());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public Task(String name,String task,Calendar calendar,String call,String fio,String mail,boolean sch, String login){// конструктор задачи
+    public Task(String name,String task,Calendar calendar,String call,String fio,String mail,boolean sch, String login, int number){// конструктор задачи
         this.task=task;
         this.calendar=calendar;
         this.name=name;
@@ -43,6 +43,7 @@ public class Task extends TimerTask {//класс задачи расширяю�
         this.mail=mail;
         this.sch=sch;
         this.login=login;
+        this.number=number;
     }
 
     public void setCalendar(Calendar calendar) {

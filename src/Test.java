@@ -84,9 +84,9 @@ public class Test {
                                                 if(word.equals("delete")){
                                                         out.write(word+"\n");
                                                         out.flush();
-                                                        System.out.println("введите наименование задачи");
-                                                        String name = reader.readLine();
-                                                        out.write(name+"\n");
+                                                        System.out.println("введите номер");
+                                                        int num = Integer.parseInt(reader.readLine());
+                                                        out.write(num+"\n");
                                                         out.flush();
                                                 }
                                                 String serverWord = in.readLine(); // ждём, что скажет сервер

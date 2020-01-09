@@ -8,7 +8,7 @@ public class Server {
     public static final int PORT = 8080;
     public static LinkedList<ServerSomthing> serverList = new LinkedList<ServerSomthing>(); // список всех нитей
 
-    public static void outTask(String name,String task,String mail,String call,String fio,String login) throws IOException {//все что нужно отправить пользователю
+    public static void outTask(String name,String task,String mail,String call,String fio,String login,int num) throws IOException {//все что нужно отправить пользователю
         for( int i =0; i<serverList.size();i++) {
             if (login.equals(serverList.get(i).getLogin())) {
                 Socket socket = serverList.get(i).getSocket();
@@ -22,6 +22,8 @@ public class Server {
                 out.write(call+"\n");
                 out.flush();
                 out.write(fio+"\n");
+                out.flush();
+                out.write(num+"\n");
                 out.flush();
                 //System.out.println("otpravil");
             }

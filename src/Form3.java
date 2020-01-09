@@ -46,7 +46,7 @@ public class Form3 extends JFrame{
                 String call = numberField.getText();
                 String fio = fioField.getText();
                 String login = loginField1.getText();
-                Task task1 = new Task(name,task,calendar,call, fio, mail,true,login);
+                Task task1 = new Task(name,task,calendar,call, fio, mail,true,login,0);
                 taskLog.addTask(task1);
                 try {
                     RecordTasks.writeTasks(taskLog,RecordTasks.getFile());

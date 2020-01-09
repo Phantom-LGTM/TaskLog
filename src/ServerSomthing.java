@@ -56,6 +56,23 @@ class ServerSomthing extends Thread {
                     RecordTasks.writeTasks(tasks,RecordTasks.getFile());
                     break;
                 }
+                if(word.equals("postpound")){
+                    int num = Integer.parseInt(in.readLine());
+                    int year = Integer.parseInt(in.readLine());
+                    int month = Integer.parseInt(in.readLine());
+                    int day = Integer.parseInt(in.readLine());
+                    int hour = Integer.parseInt(in.readLine());
+                    int minute = Integer.parseInt(in.readLine());
+                    int second = Integer.parseInt(in.readLine());
+                    Calendar calendar = new GregorianCalendar(year,month,day,hour,minute,second);
+                    for(int i = 0;i<tasks.getTasks().size();i++){
+                        if(tasks.getTasks().get(i).getNumber()==num){
+                            tasks.getTasks().get(i).setCalendar(calendar);
+                            TimeCounter.writeMassage(tasks.getTasks().get(i),TimeCounter.getTimer());
+                            RecordTasks.writeTasks(tasks,RecordTasks.getFile());
+                        }
+                    }
+                }
                 if(word.equals("add")){
                     String name = in.readLine();
                     String task = in.readLine();
@@ -70,16 +87,16 @@ class ServerSomthing extends Thread {
                     String fio = in.readLine();
                     Calendar calendar;
                     calendar = new GregorianCalendar(year,month,day,hour,minute,second);
-                    Task task1=new Task(name,task,calendar,call,fio,mail,true,login);
+                    Task task1=new Task(name,task,calendar,call,fio,mail,true,login,0);
                     tasks.addTask(task1);
-                    System.out.println(tasks.getTasks().size());
+                    //System.out.println(tasks.getTasks().size());
                     RecordTasks.writeTasks(tasks,RecordTasks.getFile());
                 }
                 if(word.equals("delete")){
-                    String name = in.readLine();
+                    int num = Integer.parseInt(in.readLine());
                     //System.out.println(name);
                     for(int i = 0;i<tasks.getTasks().size();i++){
-                        if(name.equals(tasks.getTasks().get(i).getName()) & login.equals(tasks.getTasks().get(i).getLogin())){
+                        if(num==tasks.getTasks().get(i).getNumber() & login.equals(tasks.getTasks().get(i).getLogin())){
                             tasks.deleteTask(i);
                             tasks.getTasks().get(i).cancel();
                             System.out.println(tasks.getTasks().get(i).getName());
